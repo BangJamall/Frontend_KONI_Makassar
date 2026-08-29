@@ -6,7 +6,7 @@ export default function Footer() {
     return (
         <footer>
             <hr className="border-t border-slate-500 w-full mt-20" />
-            <div className="flex flex-col items-center justify-center w-full h-24">
+            <div className="flex flex-col items-center justify-center w-full h-24 bg-primary">
 
                 <div className="flex items-center justify-center gap-4">
                     <img src={logokoni} alt="koni logo" className="h-10" />
