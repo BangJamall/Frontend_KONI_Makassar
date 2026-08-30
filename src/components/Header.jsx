@@ -8,7 +8,7 @@ export default function Header() {
     const isMainPage = location.pathname === '/home';
 
     return (
-        <header className="flex justify-between items-center bg-primary p-4">
+        <header className="sticky top-0 z-40 flex justify-between items-center bg-primary p-4 shadow-sm">
             <div className="flex items-center gap-2">
                 <Link to="/" className="flex items-center gap-2">
                     <img src={logokoni} alt="Logo" className="h-10" />
@@ -38,10 +38,10 @@ export default function Header() {
 
                         <div className="flex items-center gap-2 border-l border-black/20 pl-4">
                             {/* Tombol Login */}
-                            <button className="flex justify-center items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-1.5 rounded transition-colors shadow-sm">
+                            <Link to="/login" className="flex justify-center items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-1.5 rounded transition-colors shadow-sm">
                                 <FaSignInAlt className="w-4 h-4" />
                                 <span>Login</span>
-                            </button>
+                            </Link>
 
                             {/* Tag Link Menggantikan Button untuk Kembali ke Splash Page (URL: "/") */}
                             <Link
