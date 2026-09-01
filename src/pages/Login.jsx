@@ -2,6 +2,31 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/auth";
 
+function FloatingInput({ label, type, value, onChange }) {
+    const isFilled = value.trim().length > 0;
+
+    return (
+        <div className="relative">
+            <input
+                id={label}
+                type={type}
+                value={value}
+                onChange={onChange}
+                placeholder=" "
+                className="peer w-full rounded-xl border border-slate-200 bg-slate-50 px-4 pb-3 pt-6 text-sm text-slate-800 outline-none transition-all duration-200 placeholder:text-transparent focus:border-blue-500 focus:bg-white focus:shadow-[0_0_0_3px_rgba(59,130,246,0.1)]"
+            />
+
+            <label
+                htmlFor={label}
+                className={`pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-slate-500 transition-all duration-200 peer-focus:top-3 peer-focus:-translate-y-0 peer-focus:text-xs peer-focus:text-blue-600 ${isFilled ? "top-3 -translate-y-0 text-xs text-blue-600" : ""
+                    }`}
+            >
+                {label}
+            </label>
+        </div>
+    );
+}
+
 function Login() {
     const navigate = useNavigate();
 
@@ -29,48 +54,38 @@ function Login() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center gap-3 bg-red-500">
-            <h1 className="font-bold">Login</h1>
+        <div className="flex items-center justify-center px-4 m-4">
+            <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-[0_20px_45px_rgba(15,23,42,0.08)]">
+                <h1 className="mb-6 text-center text-2xl font-bold text-slate-800">
+                    Login
+                </h1>
 
-            <form onSubmit={handleSubmit} className="bg-blue-500 space-y-3 p-2">
-                <div className="bg-slate-200 p-2 rounded-lg">
-                    <label>Username: </label>
-
-                    <input
+                <form onSubmit={handleSubmit} className="space-y-5">
+                    <FloatingInput
+                        label="Username"
                         type="text"
                         value={username}
-                        onChange={(event) =>
-                            setUsername(event.target.value)
-                        }
-                        className="border"
+                        onChange={(event) => setUsername(event.target.value)}
                     />
-                </div>
 
-                <div className="bg-slate-200 p-2 rounded-lg">
-                    <label>Password</label>
-
-                    <input
+                    <FloatingInput
+                        label="Password"
                         type="password"
                         value={password}
-                        onChange={(event) =>
-                            setPassword(event.target.value)
-                        }
-                        className="border"
+                        onChange={(event) => setPassword(event.target.value)}
                     />
-                </div>
 
-                {error && (
-                    <p>{error}</p>
-                )}
+                    {error && <p className="text-sm text-red-500">{error}</p>}
 
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="bg-zinc-400 p-2 rounded-lg"
-                >
-                    {loading ? "Login..." : "Login"}
-                </button>
-            </form>
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full rounded-xl bg-blue-600 px-4 py-3 font-semibold text-white transition duration-200 hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
+                    >
+                        {loading ? "Login..." : "Login"}
+                    </button>
+                </form>
+            </div>
         </div>
     );
 }
